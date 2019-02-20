@@ -2,7 +2,11 @@ language: java
 jdk:
 - oraclejdk11
 notifications:
-  email: false
+  email:
+    recipients:
+    - nick.rascher@zuehlke.com
+    on_success: change # default: never
+    on_failure: always
 install:
 - ./gradlew check
 before_cache:
