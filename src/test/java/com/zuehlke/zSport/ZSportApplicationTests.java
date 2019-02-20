@@ -1,3 +1,4 @@
+/*
 package com.zuehlke.zSport;
 
 import org.junit.Test;
@@ -14,3 +15,4 @@ public class ZSportApplicationTests {
 	}
 
 }
+*/

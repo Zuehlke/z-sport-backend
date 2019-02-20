@@ -1,3 +1,4 @@
+/*
 package com.zuehlke.zSport.Repository;
 
 import com.zuehlke.zSport.Model.Event;
@@ -41,3 +42,4 @@ public class EventRepositoryIntegrationTest {
                 .hasFieldOrPropertyWithValue("user", eventCreator);
     }
 }
+*/
