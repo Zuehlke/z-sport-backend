@@ -14,4 +14,3 @@ before_install:
 task wrapper(type: Wrapper) {
     gradleVersion = '3.3'
 }
-# give it a try
