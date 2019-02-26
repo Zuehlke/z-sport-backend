@@ -5,12 +5,14 @@ import com.zuehlke.zSport.Model.Event;
 import com.zuehlke.zSport.Model.Sport;
 import com.zuehlke.zSport.Model.User;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 
 @RunWith(SpringRunner.class)
@@ -38,5 +40,12 @@ public class ZSportModelTests {
         user.setId(idValue);
         assertEquals(idValue, user.getId());
     }
+
+    @Ignore
+    @Test
+    public void someTest() {
+        assertTrue(true);
+    }
 }
+
 */
