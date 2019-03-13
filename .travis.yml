@@ -19,6 +19,7 @@ jobs:
     - ./gradlew test
   #- stage: "Deploy to GCP"
 before_install:
-  - docker build -t z-sport-backend .
+  # pointless to build the image here
+  #- docker build -t z-sport-backend .
   - docker images
 
