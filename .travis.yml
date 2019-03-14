@@ -23,7 +23,7 @@ install:
   - ./gradlew check
 jobs:
   include:
-  # TODO: re enable this - currently not running to reduce waiting time
+  # TODO: re enable this - currently not running to reduce build time
   #- stage: "Unit Tests"
   #  script:
   #  - ./gradlew test
