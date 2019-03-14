@@ -1,4 +1,4 @@
-FROM snackbar/z-sport-java11
+FROM snackbar/z-sport-java11:l.0.0
 
 ADD build/libs/*.jar /tmp
 
