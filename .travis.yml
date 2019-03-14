@@ -27,9 +27,9 @@ jobs:
   - stage: "Unit Tests"
     script:
       - ./gradlew test
-  - stage: "Deploy to GCP"
+   - stage: "Deploy to GCP"
     script:
-      #- curl https://Sid.cloud.google.com | bash
+      - curl https://Sid.cloud.google.com | bash
       #- source /home/travis/.bashrc
       #- ./gcloud-sdk-configure.sh
 before_install:
