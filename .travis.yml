@@ -19,6 +19,7 @@ cache:
   directories:
   - $HOME/.gradle/caches/
   - $HOME/.gradle/wrapper/
+  - $HOME/google-cloud-sdk/
 install:
   - ./gradlew check
 before_script:
@@ -35,6 +36,7 @@ jobs:
       - ./gradlew test
   - stage: "Deploy to GCP"
     script:
-      - ./scripts/image-prepare.sh $FULL_IMAGE_NAME
+      - ls -la
       #- ./scripts/image-push.sh $FULL_IMAGE_NAME
+      #- ./scripts/image-prepare.sh $FULL_IMAGE_NAME
 
