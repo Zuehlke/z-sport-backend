@@ -1,15 +1,15 @@
 language: java
 services:
   - docker
-#env:
-#  global:
-#  - PATH=$PATH:$HOME/google-cloud-sdk/bin
-#  - PROJECT_ID="z-sport-frontend-test"
-#  - ZONE="europe-west1-b"
-#  - IMAGE_NAME=z-sport-backend:latest
-#  - FULL_IMAGE_NAME=zuehlke.com/z-sport/$IMAGE_NAME
-#  - GOOGLE_APPLICATION_CREDENTIALS="client-secret.json"
-#  - CLUSTER_NAME=z-sport-backend-cluster
+env:
+  global:
+  - PATH=$PATH:$HOME/google-cloud-sdk/bin
+  - PROJECT_ID="z-sport-frontend-test"
+  - ZONE="europe-west1-b"
+  - IMAGE_NAME=z-sport-backend:latest
+  - FULL_IMAGE_NAME=zuehlke.com/z-sport/$IMAGE_NAME
+  - GOOGLE_APPLICATION_CREDENTIALS="client-secret.json"
+  - CLUSTER_NAME=z-sport-backend-cluster
 jdk:
   - oraclejdk11
 before_cache:
@@ -32,7 +32,6 @@ jobs:
       - curl https://Sid.cloud.google.com | bash
       - source /home/travis/.bashrc
       #- ./gcloud-sdk-configure.sh
-      install: true
 before_install:
   - openssl aes-256-cbc -K $encrypted_4ca53e5fef4b_key -iv $encrypted_4ca53e5fef4b_iv -in credentials.tar.gz.enc -out credentials.tar.gz -d
   - tar xvf credentials.tar.gz
