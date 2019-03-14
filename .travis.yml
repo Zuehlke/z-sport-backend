@@ -1,15 +1,15 @@
 language: java
 services:
   - docker
-env:
-  global:
-  - PATH=$PATH:$HOME/google-cloud-sdk/bin
-  - PROJECT_ID="z-sport-frontend-test"
-  - ZONE="europe-west1-b"
-  - IMAGE_NAME=z-sport-backend:latest
-  - FULL_IMAGE_NAME=zuehlke.com/z-sport/$IMAGE_NAME
-  - GOOGLE_APPLICATION_CREDENTIALS="client-secret.json"
-  - CLUSTER_NAME=softserve-demo
+#env:
+#  global:
+#  - PATH=$PATH:$HOME/google-cloud-sdk/bin
+#  - PROJECT_ID="z-sport-frontend-test"
+#  - ZONE="europe-west1-b"
+#  - IMAGE_NAME=z-sport-backend:latest
+#  - FULL_IMAGE_NAME=zuehlke.com/z-sport/$IMAGE_NAME
+#  - GOOGLE_APPLICATION_CREDENTIALS="client-secret.json"
+#  - CLUSTER_NAME=z-sport-backend-cluster
 jdk:
   - oraclejdk11
 before_cache:
