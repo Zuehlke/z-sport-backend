@@ -21,7 +21,6 @@ cache:
   - $HOME/.gradle/wrapper/
   - $HOME/google-cloud-sdk/
 install:
-  - ./gradlew check
   - ./gradlew build
 before_script:
   - gcloud version || true
