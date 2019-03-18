@@ -38,9 +38,6 @@ jobs:
     #    - ./gradlew test
     - stage: "Deploy to GCP"
       script:
-        - ls -la
-        - pwd
-        - find . -name "*.jar" -print
         - docker images
         - docker build -t $FULL_IMAGE_NAME .
         - docker images
