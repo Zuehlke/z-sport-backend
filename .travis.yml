@@ -37,10 +37,7 @@ jobs:
       script:
         - ls -la
         - pwd
-        - cd build
-        - ls -la
-        - cd libs
-        - ls -la
+        - find . -name "*.jar" -print
         - docker images
         - docker build -t z-sport-backend .
         - docker images
