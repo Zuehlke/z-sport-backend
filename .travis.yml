@@ -5,7 +5,7 @@ env:
   global:
   - PATH=$PATH:$HOME/google-cloud-sdk/bin
   - PROJECT_ID="z-sport-frontend-test"
-  - ZONE="europe-west1-b"
+  - ZONE="europe-west1-c"
   - IMAGE_NAME=z-sport-backend:latest
   - GOOGLE_APPLICATION_CREDENTIALS="client-secret.json"
   - CLUSTER_NAME=z-sport-backend-cluster
@@ -29,14 +29,16 @@ before_script:
   #- gcloud version || true
   #- if [ ! -d "$HOME/google-cloud-sdk/bin" ]; then rm -rf $HOME/google-cloud-sdk; export CLOUDSDK_CORE_DISABLE_PROMPTS=1; curl https://sdk.cloud.google.com | bash; fi
   #- source /home/travis/google-cloud-sdk/path.bash.inc
+  #- gcloud components install kubectl
+
 
   - export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)";
   - echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list;
   - curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -;
   - sudo apt-get update && sudo apt-get install google-cloud-sdk;
+  - sudo apt-get update && sudo apt-get --only-upgrade install kubectl
 
-  - gcloud components update
-  - gcloud components install kubectl
+
 jobs:
   include:
     #- stage: "Unit Tests"
