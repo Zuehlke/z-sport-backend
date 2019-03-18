@@ -7,7 +7,6 @@ env:
   - PROJECT_ID="z-sport-frontend-test"
   - ZONE="europe-west1-b"
   - IMAGE_NAME=z-sport-backend:latest
-  - FULL_IMAGE_NAME=zuehlke.com/z-sport/$IMAGE_NAME
   - GOOGLE_APPLICATION_CREDENTIALS="client-secret.json"
   - CLUSTER_NAME=z-sport-backend-cluster
 jdk:
@@ -45,7 +44,7 @@ jobs:
         - docker build -t z-sport-backend .
         - docker images
         - gcloud auth activate-service-account travis-kubernetes-service-acc@devops-workshops-for-schools.iam.gserviceaccount.com --key-file=client-secret.json
-        - gcloud docker -- push $FULL_IMAGE_NAME
+        - gcloud docker -- push $IMAGE_NAME
         #- ./scripts/image-push.sh $FULL_IMAGE_NAME
         #- ./scripts/image-prepare.sh $FULL_IMAGE_NAME
 
