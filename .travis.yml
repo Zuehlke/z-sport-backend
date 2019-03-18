@@ -37,7 +37,9 @@ jobs:
       script:
         - ls -la
         - pwd
-        - touch foo.bar
+        - cd build
+        - ls -la
+        - cd libs
         - ls -la
         - docker images
         - docker build -t z-sport-backend .
