@@ -41,7 +41,8 @@ jobs:
         - docker images
         - docker build -t z-sport-backend .
         - docker images
-        - gcloud docker -- push $FULL_IMAGE_NAME
+        - gcloud docker --help
+        - gcloud docker --push $FULL_IMAGE_NAME
         #- ./scripts/image-push.sh $FULL_IMAGE_NAME
         #- ./scripts/image-prepare.sh $FULL_IMAGE_NAME
 
