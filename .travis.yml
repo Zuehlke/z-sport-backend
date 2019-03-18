@@ -36,6 +36,8 @@ jobs:
     - stage: "Deploy to GCP"
       script:
         - ls -la
+        - pwd
+        - ls -la build/libs/
         - docker images
         - docker build -t z-sport-backend .
         - docker images
