@@ -32,7 +32,6 @@ before_script:
   - gcloud version
 jobs:
   include:
-    # TODO: re enable this - currently not running to reduce build time
     #- stage: "Unit Tests"
     #  script:
     #    - ./gradlew test
@@ -43,6 +42,9 @@ jobs:
         - docker images
         - gcloud auth activate-service-account travis-kubernetes-service-acc@devops-workshops-for-schools.iam.gserviceaccount.com --key-file=client-secret.json
         - gcloud docker -- push $FULL_IMAGE_NAME
-        #- ./scripts/image-push.sh $FULL_IMAGE_NAME
-        #- ./scripts/image-prepare.sh $FULL_IMAGE_NAME
+        - gcloud container clusters get-credentials your-cluster --zone your-zone --project your-project
+        - kubectl --help
+        #- kubectl run your-containername --image=gcr.io/${PROJECT_ID}/your-image:latest --port 8080
+        #- kubectl expose deployment your-containername --type=LoadBalancer --port 80 --target-port 8080
+
 
