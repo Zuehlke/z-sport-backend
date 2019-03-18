@@ -36,7 +36,7 @@ jobs:
     #- stage: "Unit Tests"
     #  script:
     #    - ./gradlew test
-    - stage: "Deploy to GCP"
+    - stage: "Deploy containers to GCP"
       script:
         - docker images
         - docker build -t $FULL_IMAGE_NAME .
@@ -44,8 +44,7 @@ jobs:
         - gcloud auth activate-service-account travis-kubernetes-service-acc@devops-workshops-for-schools.iam.gserviceaccount.com --key-file=client-secret.json
         - gcloud docker -- push $FULL_IMAGE_NAME
         - gcloud container clusters get-credentials z-sport-backend-cluster --zone europe-west1-c --project devops-workshops-for-schools
-        - kubectl --help
         - kubectl run z-sport-backend-container --image=gcr.io/devops-workshops-for-schools/z-sport-backend:latest --port 8080
-        - kubectl expose deployment z-sport-backend-container --type=LoadBalancer --port 80 --target-port 8080
+        #- kubectl expose deployment z-sport-backend-container --type=LoadBalancer --port 80 --target-port 8080
 
 
