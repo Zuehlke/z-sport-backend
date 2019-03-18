@@ -9,6 +9,7 @@ env:
   - IMAGE_NAME=z-sport-backend:latest
   - GOOGLE_APPLICATION_CREDENTIALS="client-secret.json"
   - CLUSTER_NAME=z-sport-backend-cluster
+  - FULL_IMAGE_NAME=gcr.io/devops-workshops-for-schools/$IMAGE_NAME
 jdk:
   - oraclejdk11
 before_cache:
@@ -41,10 +42,10 @@ jobs:
         - pwd
         - find . -name "*.jar" -print
         - docker images
-        - docker build -t z-sport-backend .
+        - docker build -t $FULL_IMAGE_NAME .
         - docker images
         - gcloud auth activate-service-account travis-kubernetes-service-acc@devops-workshops-for-schools.iam.gserviceaccount.com --key-file=client-secret.json
-        - gcloud docker -- push $IMAGE_NAME
+        - gcloud docker -- push $FULL_IMAGE_NAME
         #- ./scripts/image-push.sh $FULL_IMAGE_NAME
         #- ./scripts/image-prepare.sh $FULL_IMAGE_NAME
 
