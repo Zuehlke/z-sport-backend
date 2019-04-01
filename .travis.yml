@@ -40,7 +40,7 @@ jobs:
         - docker images
         - docker build -t $FULL_IMAGE_NAME .
         - docker images
-        #- gcloud auth activate-service-account travis-kubernetes-service-acc@devops-workshops-for-schools.iam.gserviceaccount.com --key-file=client-secret.json
+        - gcloud auth activate-service-account travis-kubernetes-service-acc@devops-workshops-for-schools.iam.gserviceaccount.com --key-file=client-secret.json
         - gcloud docker -- push $FULL_IMAGE_NAME
         #- gcloud container clusters get-credentials $CLUSTER_NAME --zone europe-west1-b --project devops-workshops-for-schools
         #- kubectl run z-sport-backend-container --image=gcr.io/devops-workshops-for-schools/z-sport-backend:latest --port 8080
