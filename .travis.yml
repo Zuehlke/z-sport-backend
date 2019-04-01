@@ -43,7 +43,7 @@ jobs:
     - docker images
     - gcloud auth activate-service-account travis-kubernetes-service-acc@devops-workshops-for-schools.iam.gserviceaccount.com --key-file=client-secret.json
     - gcloud docker -- push $FULL_IMAGE_NAME
-    #- gcloud compute instances delete $COMPUTE_ENGINE_NAME --zone $ZONE --quiet
+    - gcloud compute instances delete $COMPUTE_ENGINE_NAME --zone $ZONE --quiet
     - gcloud beta compute --project=devops-workshops-for-schools instances create-with-container $COMPUTE_ENGINE_NAME --zone=$ZONE --machine-type=n1-standard-1 --subnet=default --address=35.195.98.133 --network-tier=PREMIUM --metadata=google-logging-enabled=true --maintenance-policy=MIGRATE --service-account=127217498981-compute@developer.gserviceaccount.com --scopes=https://www.googleapis.com/auth/devstorage.read_only,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring.write,https://www.googleapis.com/auth/servicecontrol,https://www.googleapis.com/auth/service.management.readonly,https://www.googleapis.com/auth/trace.append --image=cos-stable-73-11647-112-0 --image-project=cos-cloud --boot-disk-size=10GB --boot-disk-type=pd-standard --boot-disk-device-name=z-sport-backend --container-image=$FULL_IMAGE_NAME --container-restart-policy=always --container-env=db_username=zsport,db_password=zSport,db_url=10.34.176.3:5432/zsport --labels=container-vm=cos-stable-73-11647-112-0
     #- gcloud container clusters get-credentials $CLUSTER_NAME --zone $ZONE --project devops-workshops-for-schools
     #- kubectl run z-sport-backend-container --image=gcr.io/devops-workshops-for-schools/z-sport-backend:latest --port 8080
