@@ -1,5 +1,7 @@
 FROM snackbar/z-sport-java11:1.0.0
 
-ADD build/libs/zSport-0.0.1-SNAPSHOT.jar /tmp
+RUN mkdir /opt/zsport
+
+ADD build/libs/zSport-0.0.1-SNAPSHOT.jar /opt/zsport
 
 ENTRYPOINT ["java","-jar","/tmp/zSport-0.0.1-SNAPSHOT.jar"]
