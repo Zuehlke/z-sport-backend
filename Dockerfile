@@ -4,4 +4,4 @@ RUN mkdir /opt/zsport
 
 ADD build/libs/zSport-0.0.1-SNAPSHOT.jar /opt/zsport
 
-ENTRYPOINT ["java","-jar","/tmp/zSport-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java","-jar","/opt/zsport/zSport-0.0.1-SNAPSHOT.jar"]

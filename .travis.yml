@@ -1,6 +1,6 @@
 language: java
 services:
-  - docker
+- docker
 env:
   global:
   - PATH=$PATH:$HOME/google-cloud-sdk/bin
@@ -11,40 +11,40 @@ env:
   - CLUSTER_NAME=standard-cluster-1
   - FULL_IMAGE_NAME=gcr.io/devops-workshops-for-schools/$IMAGE_NAME
 jdk:
-  - oraclejdk11
+- oraclejdk11
 before_cache:
-  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
-  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+- rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+- rm -fr $HOME/.gradle/caches/*/plugin-resolution/
 cache:
   directories:
   - $HOME/.gradle/caches/
   - $HOME/.gradle/wrapper/
   - $HOME/google-cloud-sdk/
 before_install:
-  - openssl aes-256-cbc -K $encrypted_21af30358e49_key -iv $encrypted_21af30358e49_iv -in client-secret.json.enc -out client-secret.json -d
+- openssl aes-256-cbc -K $encrypted_21af30358e49_key -iv $encrypted_21af30358e49_iv -in client-secret.json.enc -out client-secret.json -d
 install:
-  - ./gradlew build
+- ./gradlew build
 before_script:
-  - export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)";
-  - echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list;
-  - curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -;
-  - sudo apt-get update && sudo apt-get install google-cloud-sdk;
-  - sudo apt-get update && sudo apt-get install kubectl
+- export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)";
+- echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list;
+- curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -;
+- sudo apt-get update && sudo apt-get install google-cloud-sdk;
+- sudo apt-get update && sudo apt-get install kubectl
 jobs:
   include:
-    #- stage: "Unit Tests"
-    #  script:
-    #    - ./gradlew test
-    - stage: "Deploy containers to GCP"
-      script:
-        - docker images
-        - docker build -t $FULL_IMAGE_NAME .
-        - docker images
-        - gcloud auth activate-service-account travis-kubernetes-service-acc@devops-workshops-for-schools.iam.gserviceaccount.com --key-file=client-secret.json
-        - gcloud docker -- push $FULL_IMAGE_NAME
-        - gcloud beta compute --project=devops-workshops-for-schools instances create-with-container z-sport-backend --zone=europe-west1-b --machine-type=n1-standard-1 --subnet=default --network-tier=PREMIUM --metadata=google-logging-enabled=true --maintenance-policy=MIGRATE --service-account=127217498981-compute@developer.gserviceaccount.com --scopes=https://www.googleapis.com/auth/devstorage.read_only,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring.write,https://www.googleapis.com/auth/servicecontrol,https://www.googleapis.com/auth/service.management.readonly,https://www.googleapis.com/auth/trace.append --image=cos-stable-73-11647-112-0 --image-project=cos-cloud --boot-disk-size=10GB --boot-disk-type=pd-standard --boot-disk-device-name=z-sport-backend --container-image=$FULL_IMAGE_NAME --container-restart-policy=always --container-env=db_username=zsport,db_password=zSport,db_url=10.34.176.3:5432/zsport --labels=container-vm=cos-stable-73-11647-112-0
-        #- gcloud container clusters get-credentials $CLUSTER_NAME --zone europe-west1-b --project devops-workshops-for-schools
-        #- kubectl run z-sport-backend-container --image=gcr.io/devops-workshops-for-schools/z-sport-backend:latest --port 8080
-        #- kubectl expose deployment z-sport-backend-container --type=LoadBalancer --port 80 --target-port 8080
+  #- stage: "Unit Tests"
+  #  script:
+  #    - ./gradlew test
+  - stage: "Deploy containers to GCP"
+    script:
+    - docker images
+    - docker build -t $FULL_IMAGE_NAME .
+    - docker images
+    - gcloud auth activate-service-account travis-kubernetes-service-acc@devops-workshops-for-schools.iam.gserviceaccount.com --key-file=client-secret.json
+    - gcloud docker -- push $FULL_IMAGE_NAME
+    - gcloud beta compute --project=devops-workshops-for-schools instances create-with-container z-sport-backend --zone=europe-west1-b --machine-type=n1-standard-1 --subnet=default --network-tier=PREMIUM --metadata=google-logging-enabled=true --maintenance-policy=MIGRATE --service-account=127217498981-compute@developer.gserviceaccount.com --scopes=https://www.googleapis.com/auth/devstorage.read_only,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring.write,https://www.googleapis.com/auth/servicecontrol,https://www.googleapis.com/auth/service.management.readonly,https://www.googleapis.com/auth/trace.append --image=cos-stable-73-11647-112-0 --image-project=cos-cloud --boot-disk-size=10GB --boot-disk-type=pd-standard --boot-disk-device-name=z-sport-backend --container-image=$FULL_IMAGE_NAME --container-restart-policy=always --container-env=db_username=zsport,db_password=zSport,db_url=10.34.176.3:5432/zsport --labels=container-vm=cos-stable-73-11647-112-0
+    #- gcloud container clusters get-credentials $CLUSTER_NAME --zone europe-west1-b --project devops-workshops-for-schools
+    #- kubectl run z-sport-backend-container --image=gcr.io/devops-workshops-for-schools/z-sport-backend:latest --port 8080
+    #- kubectl expose deployment z-sport-backend-container --type=LoadBalancer --port 80 --target-port 8080
 
 
